@@ -15,19 +15,18 @@ class InsertViewModel(private val mhs: MahasiswaRepository): ViewModel() {
     var uiState by mutableStateOf(InsertUiState())
         private set
 
-    fun updateInsertMhsState(insertUiEvent. InsertUiEvent)
-    {
+    fun UpdateInsertMhsState(insertUiEvent: InsertUiEvent){
         uiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
-
-    suspend fun insertMhs() {
+    suspend fun insertMhs(){
         viewModelScope.launch {
             try {
                 mhs.insertMahasiswa(uiState.insertUiEvent.toMhs())
-            } catch (e: Exception) {
+            }catch (e:Exception){
                 e.printStackTrace()
             }
+
         }
     }
 }
@@ -53,8 +52,8 @@ fun InsertUiEvent.toMhs(): Mahasiswa = Mahasiswa(
     kelas = kelas,
     angkatan = angkatan
 )
-fun Mahasiswa.toUiStateMhs(). InsertUiState = InsertUiState(
 
+fun Mahasiswa.toUiStateMhs(): InsertUiState = InsertUiState(
     insertUiEvent = toInsertUiEvent()
 )
 
