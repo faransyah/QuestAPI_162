@@ -1,6 +1,8 @@
 package com.example.p12.ui.viewmodel
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.network.HttpException
@@ -36,5 +38,16 @@ class HomeViewModel(private val mhs: MahasiswaRepository): ViewModel(){
             }
         }
 
+    }
+    fun deleteMhs(nim: String){
+        viewModelScope.launch {
+            try {
+                mhs.deleteMahasiswa(nim)
+            }catch (e: IOException){
+                HomeUiState.Error
+            }catch (e:HttpException){
+                HomeUiState.Error
+            }
+        }
     }
 }
