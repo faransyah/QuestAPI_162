@@ -4,11 +4,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.p12.MahasiswaApplications
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
-        initializer { HomeViewModel(aplikasiKontak().container.KontakRepository) }
-        initializer { InsertViewModel(aplikasiKontak().container.KontakRepository) }
+        initializer { HomeViewModel(aplikasiKontak().container.kontakRepository) }
+        initializer { InsertViewModel(aplikasiKontak().container.kontakRepository) }
     }
 
 
