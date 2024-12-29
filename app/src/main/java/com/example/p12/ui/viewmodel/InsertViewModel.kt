@@ -17,7 +17,7 @@ class InsertViewModel(private val mhs: MahasiswaRepository): ViewModel() {
 
     fun updateInsertMhsState(insertUiEvent. InsertUiEvent)
     {
-        uiState = INsertUiState(insertUiEvent = insertUiEvent)
+        uiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
 
@@ -31,6 +31,11 @@ class InsertViewModel(private val mhs: MahasiswaRepository): ViewModel() {
         }
     }
 }
+
+data class InsertUiState(
+    val insertUiEvent: InsertUiEvent = InsertUiEvent()
+)
+
 data class InsertUiEvent(
     val nim: String="",
     val nama: String="",
