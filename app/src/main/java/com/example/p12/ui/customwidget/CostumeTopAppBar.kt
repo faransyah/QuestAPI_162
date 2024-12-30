@@ -19,7 +19,7 @@ fun CostumeTopAppBar(
   title: String,
   canNavigateBack: Boolean,
   modifier: Modifier = Modifier,
-  scrollBehacior: TopAppBarScrollBehavior? = null,
+  scrollBehavior: TopAppBarScrollBehavior? = null,
   navigateUp: ()-> Unit = {},
   onRefresh: () -> Unit = {},
 ){
@@ -33,7 +33,7 @@ fun CostumeTopAppBar(
 
         },
         modifier = modifier,
-        scrollBehavior = scrollBehacior, navigationIcon={
+        scrollBehavior = scrollBehavior, navigationIcon={
             if (canNavigateBack){
                 IconButton(onClick = navigateUp) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
