@@ -36,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.p12.R
 import com.example.p12.model.Mahasiswa
 import com.example.p12.ui.customwidget.CostumeTopAppBar
 import com.example.p12.ui.navigation.DestinasiNavigasi
@@ -65,7 +66,7 @@ fun HomeScreen(
             CostumeTopAppBar(
                 title = DestinasiHome.titleRes,
                 canNavigateBack = false,
-                scrollBehacior = scrollBehavior,
+                scrollBehavior = scrollBehavior,
                 onRefresh = {
                     viewModel.getMhs()
                 }
@@ -103,7 +104,6 @@ fun HomeStatus(
     onDetailClick: (String) -> Unit
 
 ){
-
     when(homeUiState){
         is HomeUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
 
@@ -133,7 +133,7 @@ fun HomeStatus(
 fun OnLoading(modifier: Modifier =Modifier){
     Image(
         modifier = modifier.size(200.dp),
-        painter = painterResource(R.drawable.loading_img),
+        painter = painterResource(R.drawable.logo),
         contentDescription = stringResource(R.string.loading)
     )
 }
@@ -146,9 +146,9 @@ fun OnError(retryAction: () -> Unit,modifier: Modifier = Modifier){
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic)
-        )
+       Image(
+           painter = painterResource(id = R.drawable.logo), contentDescription = ""
+       )
         Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
         Button(onClick = retryAction) {
             Text(stringResource(R.string.retry))
