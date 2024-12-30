@@ -1,6 +1,5 @@
 package com.example.p12.ui.viewmodel
 
-import android.media.metrics.Event
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -64,6 +63,7 @@ fun Mahasiswa.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
     alamat = alamat,
     jenisKelamin = jenisKelamin,
     kelas = kelas,
+    angkatan = angkatan
 )
 
 
