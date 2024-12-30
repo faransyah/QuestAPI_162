@@ -13,7 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -28,7 +27,6 @@ import com.example.p12.ui.viewmodel.InsertUiState
 import com.example.p12.ui.viewmodel.InsertViewModel
 import com.example.p12.ui.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
-import java.text.Normalizer.Form
 
 object DestinasiEntry : DestinasiNavigasi{
     override val route = "item_entry"
@@ -59,11 +57,11 @@ fun EntryMhsScreen(
     ) { innerPadding ->
         EntryBody(
             insertUiState = viewModel.uiState,
-            onSiswaValueChange = viewModel::updateInsertMhsState,
+            onSiswaValueChange = viewModel::UpdateInsertMhsState,
             onSaveClick = {
                 coroutineScope.launch {
                     viewModel.insertMhs()
-                    navigateBack
+                    navigateBack()
                 }
             },
             modifier = Modifier
@@ -116,50 +114,49 @@ fun FormInput(
     ) {
         OutlinedTextField(
             value = insertUiEvent.nama,
-            onValueChange = {onValueChange(insertUiEvent.copy(nama = it))},
-            label = { Text("Nama")},
+            onValueChange = { onValueChange(insertUiEvent.copy(nama = it)) },
+            label = { Text("Nama") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
 
         OutlinedTextField(
-            value = insertUiEvent.nim,
-            onValueChange = {onValueChange(insertUiEvent.copy(nim = it))},
-            label = { Text("NIM")},
+            value = insertUiEvent.nim   ,
+            onValueChange = { onValueChange(insertUiEvent.copy(nim = it)) },
+            label = { Text("NIM") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
-
         )
         OutlinedTextField(
             value = insertUiEvent.jenisKelamin,
-            onValueChange = {onValueChange(insertUiEvent.copy(jenisKelamin = it))},
-            label = { Text("JenisKelamin")},
+            onValueChange = { onValueChange(insertUiEvent.copy(jenisKelamin = it)) },
+            label = { Text("Jenis Kelamin") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
         OutlinedTextField(
             value = insertUiEvent.alamat,
-            onValueChange = {onValueChange(insertUiEvent.copy(alamat = it))},
-            label = { Text("Alamat")},
+            onValueChange = { onValueChange(insertUiEvent.copy(alamat = it)) },
+            label = { Text("Alamat") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
         OutlinedTextField(
-            value = insertUiEvent.kelas,
-            onValueChange = {onValueChange(insertUiEvent.copy(kelas = it))},
-            label = { Text("Kelas")},
+            value = insertUiEvent.kelas ,
+            onValueChange = { onValueChange(insertUiEvent.copy(kelas = it)) },
+            label = { Text("Kelas") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
         OutlinedTextField(
             value = insertUiEvent.angkatan,
-            onValueChange = {onValueChange(insertUiEvent.copy(angkatan = it))},
-            label = { Text("Angkatan")},
+            onValueChange = { onValueChange(insertUiEvent.copy(angkatan = it)) },
+            label = { Text("Angkatan") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
