@@ -1,9 +1,8 @@
 package com.example.p12.repository
 
-import android.os.Parcel
-import android.os.Parcelable
 import com.example.p12.model.Mahasiswa
 import com.example.p12.service_api.MahasiswaService
+import okio.IOException
 
 interface MahasiswaRepository{
     suspend fun getMahasiswa(): List<Mahasiswa>
@@ -14,38 +13,38 @@ interface MahasiswaRepository{
 
     suspend fun deleteMahasiswa(nim: String)
 
-    suspend fun getMahasiswabyId(nim: String): Mahasiswa
+    suspend fun getMahasiswabyNim(nim: String): Mahasiswa
 }
 
 class NetworkMahasiswaRepository(
     private val mahasiswaApiService: MahasiswaService
 ): MahasiswaRepository {
-    constructor(parcel: Parcel) : this(TODO("mahasiswaApiService")) {
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<NetworkMahasiswaRepository> {
-        override fun createFromParcel(parcel: Parcel): NetworkMahasiswaRepository {
-            return NetworkMahasiswaRepository(parcel)
-        }
-
-        override fun newArray(size: Int): Array<NetworkMahasiswaRepository?> {
-            return arrayOfNulls(size)
-        }
-    }
-
-    override suspend fun getMahasiswabyId(nim: String): Mahasiswa {
+    override suspend fun getMahasiswa(): List<Mahasiswa> =
         mahasiswaApiService.getAllMahasiswa()
+
+    override suspend fun insertMahasiswa(mahasiswa: Mahasiswa) {
+        mahasiswaApiService.insertMahasiswa(mahasiswa)
+    }
+    override suspend fun updateMahasiswa(nim: String, mahasiswa: Mahasiswa) {
+        mahasiswaApiService.updateMahasiswa(nim, mahasiswa)
     }
 
-    override suspend fun getMahasiswa(): List<Mahasiswa> {
-        return mahasiswaApiService.getAllMahasiswa(nim)
+    override suspend fun deleteMahasiswa(nim: String){
+        try {
+            val response = mahasiswaApiService.deleteMahasiswa(nim)
+            if (!response.isSuccessful){
+                throw IOException(
+                    "Failed to delete Mahasiswa. HTTP Status Code: ${response.code()}"
+                )
+            }else  {
+                println(response.message())
+            }
+        }catch (e:Exception){
+            throw e
+        }
+    }
+
+    override suspend fun getMahasiswabyNim(nim: String): Mahasiswa{
+        return mahasiswaApiService.getMahasiswabyNim(nim)
     }
 }
