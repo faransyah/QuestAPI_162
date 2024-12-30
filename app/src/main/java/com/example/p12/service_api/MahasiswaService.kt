@@ -2,6 +2,7 @@ package com.example.p12.service_api
 
 import com.example.p12.model.Mahasiswa
 import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -29,6 +30,6 @@ interface MahasiswaService {
     suspend fun updateMahasiswa(@Query("nim") nim: String, @Body mahasiswa: Mahasiswa)
 
     @DELETE("deletemahasiswa.php/{nim}")
-    suspend fun deleteMahasiswa(@Query("nim") nim: String): Response
+    suspend fun deleteMahasiswa(@Query("nim") nim: String): retrofit2.Response<Void>
 
 }
